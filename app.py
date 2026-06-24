@@ -1,26 +1,18 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import os
+from flask import Flask, render_template
 
-class DummyServer(BaseHTTPRequestHandler):
-    def _set_headers(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
+# Initialize the Flask application
+app = Flask(__name__)
 
-    def do_GET(self):
-        self._set_headers()
-        self.wfile.write(
-            b'{"status":"success","message":"Hello Sudarshan From Shubham"}'
-        )
+# Route for the Home page
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-port = int(os.environ.get("PORT", 8080))
+# Route for the About page
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-import os
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    server_address = ("", port)
-
-    httpd = HTTPServer(server_address, DummyServer)
-    print(f"Running on port {port}")
-    httpd.serve_forever()
+# Run the local development server
+if __name__ == '__main__':
+    app.run(debug=True)
