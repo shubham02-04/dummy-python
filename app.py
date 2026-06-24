@@ -10,7 +10,7 @@ class DummyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self._set_headers()
         self.wfile.write(
-            b'{"status":"success","message":"Hello from Azure Web App"}'
+            b'{"status":"success","message":"Hello Sudarshan From Shubham"}'
         )
 
 port = int(os.environ.get("PORT", 8080))
