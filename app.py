@@ -15,8 +15,12 @@ class DummyServer(BaseHTTPRequestHandler):
 
 port = int(os.environ.get("PORT", 8080))
 
+import os
+
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
     server_address = ("", port)
+
     httpd = HTTPServer(server_address, DummyServer)
     print(f"Running on port {port}")
     httpd.serve_forever()
