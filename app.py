@@ -11,7 +11,7 @@ def home():
 # Route for the About page
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('careers.html')
 
 # Run the local development server
 if __name__ == '__main__':
