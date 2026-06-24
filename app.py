@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import os
 
 class DummyServer(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -8,11 +9,14 @@ class DummyServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_headers()
-        response = b'{"status": "success", "message": "Hello from the dummy Python server!"}'
-        self.wfile.write(response)
+        self.wfile.write(
+            b'{"status":"success","message":"Hello from Azure Web App"}'
+        )
+
+port = int(os.environ.get("PORT", 8080))
 
 if __name__ == "__main__":
-    server_address = ('', 8080)
+    server_address = ("", port)
     httpd = HTTPServer(server_address, DummyServer)
-    print("Running dummy web app on port 8080...")
+    print(f"Running on port {port}")
     httpd.serve_forever()
